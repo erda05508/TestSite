@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Store - Low Prices in Books & more{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="container">
+    <div class="row row-offcanvas row-offcanvas-right">
+      
+      <div class="album py-5">
+        <div class="pb-3">
+          <h1 class="h3">Список пользователей и телефонов</h1>
+        </div>
+        {% if not products %}
+        <div class="col-12">There are currently no products active</div>
+        {% else %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-5">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="row">#</th>
+                <th>ФИО</th>
+                <th>Аппарат</th>
+                <th>Вн.номер</th>
+                <th>Инв.номер</th>
+                <th>Сер.номер</th>
+                <th>Розетка и порт</th>
+                <th>Стоимость</th>
+                <th>Цена с НДС</th>
+                <th>Адресат</th>
+              </tr>
+            </thead>
+            {% for product in products %}
+            <tbody>
+              <tr>
+                <th scope="row">{{ product.id }}</th>
+                <td><a class="text-dark"
+                  href="{{ product.get_absolute_url }}">{{ product.title }}</a></td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.internalnumber }}</td>
+                <td>{{ product.inventorynumber }}</td>
+                <td>{{ product.serialnumber }}</td>
+                <td>{{ product.rozport }}</td>
+                <td>{{ product.discount_price }}</td>
+                <td>{{ product.regular_price }}</td>
+                <td>{{ product.adressee }}</td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+          
+        </div>
+        {% endif %}
+      </div>
+      
+    </div>
+  </div>
+
+  {% endblock %}

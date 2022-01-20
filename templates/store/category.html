@@ -1,0 +1,62 @@
+{% extends "../base.html" %}
+{% block title %}
+{% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+{% block content %}
+
+<div class="container" style="max-width: 1000px">
+  <div class="col-12">
+    <h1 class="h2">{{ category.name|title }}</h1>
+  </div>
+  <div class="col-12 d-flex justify-content-between">
+    <div><b>Popular </b> products purchased</div>
+  </div>
+  <hr />
+</div>
+<div class="container">
+  <div class="row">
+    <div class="album">
+      {% if not products %}
+      <div class="col-12">There are currently no products active <a href="{% url 'store:store_home' %}">Home</a></div>
+      {% else %}
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>ФИО</th>
+              <th>Аппарат</th>
+              <th>Вн.номер</th>
+              <th>Инв.номер</th>
+              <th>Сер.номер</th>
+              <th>Розетка и порт</th>
+              <th>Стоимость</th>
+              <th>Цена с НДС</th>
+              <th>Адресат</th>
+            </tr>
+          </thead>
+          {% for product in products %}
+          <tbody>
+            <tr>
+              <th scope="row">{{ product.id }}</th>
+              <td><a class="text-dark"
+                href="{{ product.get_absolute_url }}">{{ product.title }}</a></td>
+              <td>{{ product.category }}</td>
+              <td>{{ product.internalnumber }}</td>
+              <td>{{ product.inventorynumber }}</td>
+              <td>{{ product.serialnumber }}</td>
+              <td>{{ product.rozport }}</td>
+              <td>{{ product.discount_price }}</td>
+              <td>{{ product.regular_price }}</td>
+              <td>{{ product.adressee }}</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
