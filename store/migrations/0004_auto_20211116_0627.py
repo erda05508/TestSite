@@ -7,26 +7,52 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('store', '0003_auto_20211115_0659'),
+        ("store", "0003_auto_20211115_0659"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Adressee',
+            name="Adressee",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Необходимо и не должно повторяться', max_length=255, unique=True, verbose_name='Название адресата')),
-                ('slug', models.SlugField(max_length=255, unique=True, verbose_name='Adressee safe URL')),
-                ('is_active', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Необходимо и не должно повторяться",
+                        max_length=255,
+                        unique=True,
+                        verbose_name="Название адресата",
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        max_length=255, unique=True, verbose_name="Adressee safe URL"
+                    ),
+                ),
+                ("is_active", models.BooleanField(default=True)),
             ],
             options={
-                'verbose_name': 'Adressee',
-                'verbose_name_plural': 'Adressees',
+                "verbose_name": "Adressee",
+                "verbose_name_plural": "Adressees",
             },
         ),
         migrations.AddField(
-            model_name='product',
-            name='addressee',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.RESTRICT, to='store.adressee'),
+            model_name="product",
+            name="addressee",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.RESTRICT,
+                to="store.adressee",
+            ),
         ),
     ]

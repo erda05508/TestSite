@@ -12,17 +12,25 @@ def product_all(request):
 def category_list(request, category_slug=None):
     category = get_object_or_404(Category, slug=category_slug)
     products = Product.objects.filter(
-        category__in=Category.objects.get(name=category_slug).get_descendants(include_self=True)
+        category__in=Category.objects.get(name=category_slug).get_descendants(
+            include_self=True
+        )
     )
-    return render(request, "store/category.html", {"category": category, "products": products})
+    return render(
+        request, "store/category.html", {"category": category, "products": products}
+    )
 
 
 def adressee_list(request, adressee_slug=None):
     adressee = get_object_or_404(Adressee, slug=adressee_slug)
     products = Product.objects.filter(
-        adressee__in=Adressee.objects.get(name=adressee_slug).get_descendants(include_self=True)
+        adressee__in=Adressee.objects.get(name=adressee_slug).get_descendants(
+            include_self=True
+        )
     )
-    return render(request, "store/adressee.html", {"adressee": adressee, "products": products})
+    return render(
+        request, "store/adressee.html", {"adressee": adressee, "products": products}
+    )
 
 
 def product_detail(request, slug):
@@ -31,7 +39,6 @@ def product_detail(request, slug):
 
 
 class Search(ListView):
-
     def get_queryset(self):
         return Product.objects.filter(title__icontains=self.request.GET.get("q"))
 

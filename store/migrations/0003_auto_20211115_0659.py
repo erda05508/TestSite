@@ -6,39 +6,51 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('store', '0002_product_users_wishlist'),
+        ("store", "0002_product_users_wishlist"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='product',
-            options={'ordering': ('created_at',), 'verbose_name': 'Product', 'verbose_name_plural': 'Products'},
+            name="product",
+            options={
+                "ordering": ("created_at",),
+                "verbose_name": "Product",
+                "verbose_name_plural": "Products",
+            },
         ),
         migrations.AddField(
-            model_name='product',
-            name='internalnumber',
-            field=models.PositiveSmallIntegerField(blank=True, default=1, verbose_name='Внутренний номер'),
+            model_name="product",
+            name="internalnumber",
+            field=models.PositiveSmallIntegerField(
+                blank=True, default=1, verbose_name="Внутренний номер"
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='product',
-            name='inventorynumber',
-            field=models.IntegerField(blank=True, default=0, verbose_name='Инвентарный №'),
+            model_name="product",
+            name="inventorynumber",
+            field=models.IntegerField(
+                blank=True, default=0, verbose_name="Инвентарный №"
+            ),
         ),
         migrations.AddField(
-            model_name='product',
-            name='rozport',
-            field=models.PositiveSmallIntegerField(blank=True, default=1, verbose_name='Розетка(порт)'),
+            model_name="product",
+            name="rozport",
+            field=models.PositiveSmallIntegerField(
+                blank=True, default=1, verbose_name="Розетка(порт)"
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='product',
-            name='serialnumber',
-            field=models.CharField(blank=True, default=0, max_length=50, verbose_name='Серийниый №'),
+            model_name="product",
+            name="serialnumber",
+            field=models.CharField(
+                blank=True, default=0, max_length=50, verbose_name="Серийниый №"
+            ),
         ),
         migrations.AddField(
-            model_name='product',
-            name='signature',
-            field=models.BooleanField(default=False, verbose_name='Роспись'),
+            model_name="product",
+            name="signature",
+            field=models.BooleanField(default=False, verbose_name="Роспись"),
         ),
     ]

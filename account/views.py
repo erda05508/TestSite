@@ -19,7 +19,9 @@ from .tokens import account_activation_token
 @login_required
 def wishlist(request):
     products = Product.objects.filter(users_wishlist=request.user)
-    return render(request, "account/dashboard/user_wish_list.html", {"wishlist": products})
+    return render(
+        request, "account/dashboard/user_wish_list.html", {"wishlist": products}
+    )
 
 
 @login_required
@@ -37,7 +39,11 @@ def add_to_wishlist(request, id):
 @login_required
 def dashboard(request):
     orders = user_orders(request)
-    return render(request, "account/dashboard/dashboard.html", {"section": "profile", "orders": orders})
+    return render(
+        request,
+        "account/dashboard/dashboard.html",
+        {"section": "profile", "orders": orders},
+    )
 
 
 @login_required
@@ -50,7 +56,9 @@ def edit_details(request):
     else:
         user_form = UserEditForm(instance=request.user)
 
-    return render(request, "account/dashboard/edit_details.html", {"user_form": user_form})
+    return render(
+        request, "account/dashboard/edit_details.html", {"user_form": user_form}
+    )
 
 
 @login_required
@@ -87,7 +95,11 @@ def account_register(request):
                 },
             )
             user.email_user(subject=subject, message=message)
-            return render(request, "account/registration/register_email_confirm.html", {"form": registerForm})
+            return render(
+                request,
+                "account/registration/register_email_confirm.html",
+                {"form": registerForm},
+            )
     else:
         registerForm = RegistrationForm()
     return render(request, "account/registration/register.html", {"form": registerForm})
@@ -128,7 +140,9 @@ def add_address(request):
             return HttpResponseRedirect(reverse("account:addresses"))
     else:
         address_form = UserAddressForm()
-    return render(request, "account/dashboard/edit_addresses.html", {"form": address_form})
+    return render(
+        request, "account/dashboard/edit_addresses.html", {"form": address_form}
+    )
 
 
 @login_required
@@ -142,7 +156,9 @@ def edit_address(request, id):
     else:
         address = Address.objects.get(pk=id, customer=request.user)
         address_form = UserAddressForm(instance=address)
-    return render(request, "account/dashboard/edit_addresses.html", {"form": address_form})
+    return render(
+        request, "account/dashboard/edit_addresses.html", {"form": address_form}
+    )
 
 
 @login_required

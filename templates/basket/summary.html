@@ -61,11 +61,16 @@
               <td></td>
               <td></td>
               <td></td>
-              <td><select id="select {{product.category}}" style="width:150px;height:31px;">
-                <option value="">{{product.category}}</option>
-              </select></td>
+              <td>
+                <select id="select" style="width:150px;height:31px;">
+                  {% for category in categories %}
+                  <option value="{{category.id}}">{{category.name}}</option>
+                  {% endfor %}
+                </select>
+              </td>
               <td><button class="btn btn-light" type="button">Сбросить</button></td>
-              <td><a role="button" id="update-button" data-index="{% url 'basket:basket_update' %}" class="btn btn-success fw-bold" type="button">Передать</a></td>
+              <td><a id="update-button" role="button" data-index="{{product.id}}" class="btn btn-success fw-bold" type="button">Передать</a></td>
+
             </tbody>
           </table>
           
@@ -138,7 +143,7 @@
                     <td>{{ product.rozport }}</td>
                     <td>{{ product.discount_price }}</td>
                    
-                      <td><a type="button" id="update-button" data-index="{{product.id}}"
+                      <td><a type="button" id="" data-index="{{product.id}}"
                         class="update-button text-decoration-none small ps-3">Update</a>
                       </td>
                       <td><a type="button" id="delete-button" data-index="{{product.id}}"
@@ -166,6 +171,7 @@
       url: '{% url "basket:basket_delete" %}',
       data: {
         productid: $(this).data("index"),
+
         csrfmiddlewaretoken: "{{csrf_token}}",
         action: "post",
       },
@@ -189,7 +195,7 @@
   });
 
   // Update Item
-  $(document).on("click", ".update-button", function (e) {
+  $(document).on("click", "#update-button", function (e) {
     e.preventDefault();
     var prodid = $(this).data("index");
     $.ajax({
@@ -197,18 +203,10 @@
       url: '{% url "basket:basket_update" %}',
       data: {
         productid: $(this).data("index"),
-        productqty: $("#select" + basket + " option:selected").text(),
+        categoryid: $('#select option:selected').val(),
         csrfmiddlewaretoken: "{{csrf_token}}",
         action: "post",
       },
-      success: function (json) {
-
-        total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
-        document.getElementById("basket-qty").innerHTML = json.qty;
-        document.getElementById("subtotal").innerHTML = json.subtotal;
-        document.getElementById("total").innerHTML = total;
-      },
-      error: function (xhr, errmsg, err) {},
     });
   });
 </script>

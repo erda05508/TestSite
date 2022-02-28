@@ -13,12 +13,20 @@ app_name = "account"
 urlpatterns = [
     path(
         "login/",
-        auth_views.LoginView.as_view(template_name="account/login.html", form_class=UserLoginForm),
+        auth_views.LoginView.as_view(
+            template_name="account/login.html", form_class=UserLoginForm
+        ),
         name="login",
     ),
-    path("logout/", auth_views.LogoutView.as_view(next_page="/account/login/"), name="logout"),
+    path(
+        "logout/",
+        auth_views.LogoutView.as_view(next_page="/account/login/"),
+        name="logout",
+    ),
     path("register/", views.account_register, name="register"),
-    path("activate/<slug:uidb64>/<slug:token>)/", views.account_activate, name="activate"),
+    path(
+        "activate/<slug:uidb64>/<slug:token>)/", views.account_activate, name="activate"
+    ),
     # Reset password
     path(
         "password_reset/",
@@ -65,5 +73,7 @@ urlpatterns = [
     path("addresses/set_default/<slug:id>/", views.set_default, name="set_default"),
     # Wish List
     path("wishlist", views.wishlist, name="wishlist"),
-    path("wishlist/add_to_wishlist/<int:id>", views.add_to_wishlist, name="user_wishlist"),
+    path(
+        "wishlist/add_to_wishlist/<int:id>", views.add_to_wishlist, name="user_wishlist"
+    ),
 ]

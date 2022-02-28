@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.conf import settings
+from django_bulk_update.manager import BulkUpdateManager
 from store.models import Product, Category
 
 
@@ -70,20 +71,24 @@ class Basket:
         product_id = str(product)
         for product_id in self.basket:
             product_id.category = category
-        
-        return Product.objects.bulk_update(product_id, ['category'])
+
+        return Product.objects.bulk_update(product_id, ["category"])
 
     def get_subtotal_price(self):
-        return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+        return sum(
+            Decimal(item["price"]) * item["qty"] for item in self.basket.values()
+        )
 
     def get_total_price(self):
 
-        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+        subtotal = sum(
+            Decimal(item["price"]) * item["qty"] for item in self.basket.values()
+        )
 
         if subtotal == 0:
             shipping = Decimal(0.00)
         else:
-            shipping = (subtotal/100)*12
+            shipping = (subtotal / 100) * 12
 
         total = subtotal + shipping
         return total
@@ -105,3 +110,5 @@ class Basket:
 
     def save(self):
         self.session.modified = True
+
+    objects = BulkUpdateManager()
