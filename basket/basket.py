@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from django.conf import settings
 from django_bulk_update.manager import BulkUpdateManager
-from store.models import Product, Category
+from store.models import Category, Product
 
 
 class Basket:

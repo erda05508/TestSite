@@ -1,4 +1,4 @@
-from .models import Category, Adressee
+from .models import Adressee, Category
 
 
 def categories(request):

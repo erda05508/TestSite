@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
-
-from store.models import Category, Product, Adressee
+from store.models import Adressee, Category, Product
 
 
 class TestAdresseesModel(TestCase):

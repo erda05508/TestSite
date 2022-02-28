@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
 
-from .models import Category, Product, Adressee
+from .models import Adressee, Category, Product
 
 
 def product_all(request):

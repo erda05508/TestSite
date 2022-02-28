@@ -6,8 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.test import Client, TestCase
 from django.urls import reverse
-
-from store.models import Category, Product, Adressee
+from store.models import Adressee, Category, Product
 from store.views import product_all
 
 
